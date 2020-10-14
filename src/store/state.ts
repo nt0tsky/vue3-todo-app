@@ -12,8 +12,15 @@ export interface UsersState {
   tasksStorage: TaskStorage
 }
 
+const defaultState: UsersState = {
+  page: 1,
+  total: 0,
+  list: [] as UserDTO[],
+  tasksStorage: {} as TaskStorage
+}
+
 export const state = {
-  users: {} as UsersState
+  users: defaultState
 }
 
 export type State = typeof state

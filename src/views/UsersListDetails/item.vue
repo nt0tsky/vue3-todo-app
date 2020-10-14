@@ -3,7 +3,9 @@
     <template v-if="user">
       <span
         class="user-list-item__back"
-        @click="$router.push({ name: 'UsersList' })"
+        @click="
+          $router.push({ name: 'UsersList', query: { page: currentPage } })
+        "
       >
         <svg viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -54,13 +56,11 @@ import { TaskDTO } from "@/store/models/taskDTO";
 import TodoLoader from "@/components/loader.vue";
 
 export default defineComponent({
+  props: ["users", "currentPage"],
+
   components: { TodoLoader },
 
   computed: {
-    users() {
-      return this.$store.getters["users"];
-    },
-
     user(): UserDTO | null {
       const { users } = this;
       const userId = Number(this.$route.params.id);
